@@ -19,11 +19,11 @@
 
 ## Task
 
-문맥(\`context\`)과 명제(\`prompt\`)가 주어졌을 때, 해당 명제를 얼마나 확신할 수 있는지를 **1부터 7 사이의 실수**로 예측하는 회귀 문제입니다.
+문맥(`context`)과 명제(`prompt`)가 주어졌을 때, 해당 명제를 얼마나 확신할 수 있는지를 **1부터 7 사이의 실수**로 예측하는 회귀 문제입니다.
 
 | Input | Output |
 |:--|:--|
-| Context + target proposition | Certainty score \`1.0–7.0\` |
+| Context + target proposition | Certainty score `1.0–7.0` |
 | Training: **1,448** examples | Supervised regression |
 | Development: **189** examples | Model selection and calibration |
 | Test: **180** examples | Submission format |
@@ -50,13 +50,13 @@ flowchart TD
 - **Models:** KLUE-RoBERTa-large, XLM-RoBERTa-large-XNLI 계열
 - **Selection:** validation MSE를 이용한 greedy ensemble
 - **Calibration:** validation-set polynomial calibration
-- **Output:** 공식 점수 범위 \`[1, 7]\`로 clipping
+- **Output:** 공식 점수 범위 `[1, 7]`로 clipping
 
 ## Reported Result
 
 <div align="center">
 
-### \`-0.0757290\`
+### `-0.0757290`
 
 **Recorded leaderboard display score · wave8**
 
@@ -64,30 +64,30 @@ flowchart TD
 
 기존 프로젝트 README에 **공식 리더보드 1위 확인**으로 기록된 결과입니다. 리더보드의 실시간 순위와 점수를 이 README 작성 시점에 독립적으로 재확인한 것은 아니며, 외부에서 재현한 모델 성능이라고 표현하지 않습니다.
 
-- Best submission: [\`submissions/malpyeong_certainty_submission_best_wave8.jsonl\`](submissions/malpyeong_certainty_submission_best_wave8.jsonl)
-- Main training script: [\`scripts/train_transformer_regressor.py\`](scripts/train_transformer_regressor.py)
-- Ensemble selection: [\`scripts/greedy_ensemble.py\`](scripts/greedy_ensemble.py)
-- Calibration: [\`scripts/calibrate_predictions.py\`](scripts/calibrate_predictions.py)
+- Best submission: [`submissions/malpyeong_certainty_submission_best_wave8.jsonl`](submissions/malpyeong_certainty_submission_best_wave8.jsonl)
+- Main training script: [`scripts/train_transformer_regressor.py`](scripts/train_transformer_regressor.py)
+- Ensemble selection: [`scripts/greedy_ensemble.py`](scripts/greedy_ensemble.py)
+- Calibration: [`scripts/calibrate_predictions.py`](scripts/calibrate_predictions.py)
 
 ## Repository Guide
 
 | Path | Contents |
 |:--|:--|
-| [\`data/raw/\`](data/raw/) | 훈련·검증 및 평가 입력 |
-| [\`scripts/train_transformer_regressor.py\`](scripts/train_transformer_regressor.py) | Transformer 기반 회귀 학습 |
-| [\`scripts/greedy_ensemble.py\`](scripts/greedy_ensemble.py) | 검증 점수 기반 후보 결합 |
-| [\`scripts/stack_ensemble.py\`](scripts/stack_ensemble.py) | 추가 ensemble 실험 |
-| [\`scripts/calibrate_predictions.py\`](scripts/calibrate_predictions.py) | 예측 분포 보정 |
-| [\`scripts/score_submission.py\`](scripts/score_submission.py) | 제출 포맷 및 로컬 평가 |
-| [\`reports/\`](reports/) | 분석 결과 |
-| [\`docs/task_notes.md\`](docs/task_notes.md) | 과제·데이터·점수 체계 기록 |
+| [`data/raw/`](data/raw/) | 훈련·검증 및 평가 입력 |
+| [`scripts/train_transformer_regressor.py`](scripts/train_transformer_regressor.py) | Transformer 기반 회귀 학습 |
+| [`scripts/greedy_ensemble.py`](scripts/greedy_ensemble.py) | 검증 점수 기반 후보 결합 |
+| [`scripts/stack_ensemble.py`](scripts/stack_ensemble.py) | 추가 ensemble 실험 |
+| [`scripts/calibrate_predictions.py`](scripts/calibrate_predictions.py) | 예측 분포 보정 |
+| [`scripts/score_submission.py`](scripts/score_submission.py) | 제출 포맷 및 로컬 평가 |
+| [`reports/`](reports/) | 분석 결과 |
+| [`docs/task_notes.md`](docs/task_notes.md) | 과제·데이터·점수 체계 기록 |
 | [Original README](docs/README_BEFORE_PORTFOLIO_REFRESH.md) | 기존 실험 메모 |
 
 ## Reproduction Notes
 
 학습과 앙상블 재현에는 PyTorch·Transformers 및 모델 다운로드가 필요하며, GPU 사용을 권장합니다. 저장소는 일괄 설치형 패키지보다는 **실험 스크립트와 결과 기록** 중심으로 구성돼 있습니다.
 
-**학습/제출 재현 절차:** 데이터셋 확인 → 회귀 모델 학습 → dev 기반 후보 선정 → 앙상블 → calibration → JSONL 생성. 구체적인 실행 인자와 배치 스크립트는 [\`scripts/\`](scripts/)에서 확인할 수 있습니다.
+**학습/제출 재현 절차:** 데이터셋 확인 → 회귀 모델 학습 → dev 기반 후보 선정 → 앙상블 → calibration → JSONL 생성. 구체적인 실행 인자와 배치 스크립트는 [`scripts/`](scripts/)에서 확인할 수 있습니다.
 
 ## Limitations
 
